@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register – NWC Event Portal</title>
+  <link rel="stylesheet" href="css/login.css"/>
+  <link rel="stylesheet" href="css/register.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div class="login-wrapper">
+    <div class="left-panel">
+      <div class="left-content">
+        <div class="college-badge">
+          <div class="logo-circle">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="38" stroke="#FFD700" stroke-width="2.5"/>
+              <circle cx="40" cy="40" r="30" stroke="#FFD700" stroke-width="1"/>
+              <text x="50%" y="38%" dominant-baseline="middle" text-anchor="middle" fill="#FFD700" font-size="11" font-family="serif" font-weight="bold">NWC</text>
+              <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" fill="#FFD700" font-size="6" font-family="serif">EST. 1945</text>
+              <path d="M20 50 Q40 42 60 50" stroke="#FFD700" stroke-width="1" fill="none"/>
+            </svg>
+          </div>
+          <div class="college-info">
+            <h1>Nowrosjee Wadia College</h1>
+            <p>Pune, Maharashtra</p>
+          </div>
+        </div>
+        <div class="portal-title">
+          <h2>Join the<br/>Community</h2>
+          <p>Register once, participate in all college events with a single QR-based ID.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="login-card" style="max-width:480px;">
+        <h3 class="card-title">Create Account</h3>
+        <p class="card-subtitle">Register as a new student</p>
+
+        <div id="error-msg" class="error-msg" style="display:none;"></div>
+        <div id="success-msg" class="success-msg" style="display:none;"></div>
+
+        <div class="two-col">
+          <div class="form-group">
+            <label>First Name</label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" id="fname" placeholder="Rahul"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" id="lname" placeholder="Sharma"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>College Email</label>
+          <div class="input-wrap">
+            <span class="input-icon">✉</span>
+            <input type="email" id="email" placeholder="you@nwcpune.ac.in"/>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="form-group">
+            <label>Roll Number</label>
+            <div class="input-wrap">
+              <span class="input-icon">#</span>
+              <input type="text" id="roll" placeholder="NWC2024001"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Department</label>
+            <div class="input-wrap">
+              <span class="input-icon">🏫</span>
+              <select id="dept" style="padding-left:36px;padding-right:12px;">
+                <option value="">Select...</option>
+                <option>Computer Science</option>
+                <option>Information Technology</option>
+                <option>Commerce</option>
+                <option>Arts</option>
+                <option>Science</option>
+                <option>Management</option>
+                <option>Law</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="form-group">
+            <label>Year</label>
+            <div class="input-wrap">
+              <span class="input-icon">📚</span>
+              <select id="year" style="padding-left:36px;padding-right:12px;">
+                <option value="">Select...</option>
+                <option>FY</option>
+                <option>SY</option>
+                <option>TY</option>
+                <option>Final Year</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <div class="input-wrap">
+              <span class="input-icon">📱</span>
+              <input type="tel" id="phone" placeholder="9876543210"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="form-group">
+            <label>Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="password" placeholder="Min 6 chars"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <div class="input-wrap">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="cpassword" placeholder="Repeat"/>
+            </div>
+          </div>
+        </div>
+
+        <button class="login-btn" id="regBtn">Create Account</button>
+        <p class="register-link">Already have an account? <a href="login.html">Sign In</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/register.js"></script>
+</body>
+</html>

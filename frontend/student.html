@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard – NWC Event Portal</title>
+  <link rel="stylesheet" href="css/dashboard.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="38" stroke="#FFD700" stroke-width="2.5"/>
+          <text x="50%" y="38%" dominant-baseline="middle" text-anchor="middle" fill="#FFD700" font-size="11" font-family="serif" font-weight="bold">NWC</text>
+          <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" fill="#FFD700" font-size="6" font-family="serif">EST. 1945</text>
+        </svg>
+      </div>
+      <div class="sidebar-logo-text">
+        <h2>Wadia College</h2>
+        <p>Event Portal</p>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a class="nav-item active" data-section="dashboard" onclick="showSection('dashboard',this)">
+        <span class="nav-icon">🏠</span> Dashboard
+      </a>
+      <a class="nav-item" data-section="events" onclick="showSection('events',this)">
+        <span class="nav-icon">📅</span> Browse Events
+      </a>
+      <a class="nav-item" data-section="myevents" onclick="showSection('myevents',this)">
+        <span class="nav-icon">🎟️</span> My Registrations
+      </a>
+      <a class="nav-item" data-section="qrid" onclick="showSection('qrid',this)">
+        <span class="nav-icon">🔲</span> My QR / ID Card
+      </a>
+      <div class="nav-section-label" style="margin-top:12px;">Account</div>
+      <a class="nav-item" data-section="profile" onclick="showSection('profile',this)">
+        <span class="nav-icon">👤</span> Profile
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-pill">
+        <div class="user-avatar" id="sidebarAvatar">?</div>
+        <div class="user-info">
+          <p id="sidebarName">Student</p>
+          <span id="sidebarDept">Department</span>
+        </div>
+        <button class="logout-btn" onclick="logout()" title="Logout">⏏</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main-area">
+    <header class="topbar">
+      <div class="topbar-title">
+        <h1 id="pageTitle">Dashboard</h1>
+        <p id="pageSubtitle">Welcome back!</p>
+      </div>
+      <div class="topbar-actions">
+        <button class="btn btn-primary" onclick="showSection('events', document.querySelector('[data-section=events]'))">+ Register for Event</button>
+      </div>
+    </header>
+
+    <main class="page-content">
+
+      <!-- ===== DASHBOARD SECTION ===== -->
+      <section id="sec-dashboard">
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-icon navy">📅</div>
+            <div><div class="stat-num" id="st-total">0</div><div class="stat-label">Events Available</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon gold">🎟️</div>
+            <div><div class="stat-num" id="st-reg">0</div><div class="stat-label">Registered</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green">✅</div>
+            <div><div class="stat-num" id="st-attended">0</div><div class="stat-label">Attended</div></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon red">⏳</div>
+            <div><div class="stat-num" id="st-upcoming">0</div><div class="stat-label">Upcoming</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>Upcoming Events</h2>
+            <a class="btn btn-outline btn-sm" onclick="showSection('events', document.querySelector('[data-section=events]'))">View All</a>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Event</th><th>Date</th><th>Venue</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="dashEventsTbl"><tr><td colspan="5" style="text-align:center;color:var(--gray-3);">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== EVENTS SECTION ===== -->
+      <section id="sec-events" style="display:none;">
+        <div class="card">
+          <div class="card-header">
+            <h2>All Events</h2>
+            <input type="text" id="eventSearch" placeholder="Search events..." style="padding:8px 14px;border:1.5px solid var(--gray-2);border-radius:8px;font-size:0.875rem;width:200px;outline:none;" oninput="filterEvents()"/>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Event Name</th><th>Date</th><th>Venue</th><th>Category</th><th>Seats Left</th><th>Action</th></tr></thead>
+              <tbody id="allEventsTbl"><tr><td colspan="6" style="text-align:center;color:var(--gray-3);">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MY REGISTRATIONS ===== -->
+      <section id="sec-myevents" style="display:none;">
+        <div class="card">
+          <div class="card-header"><h2>My Registrations</h2></div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Event</th><th>Registered On</th><th>Date</th><th>Attendance</th><th>QR</th></tr></thead>
+              <tbody id="myRegTbl"><tr><td colspan="5" style="text-align:center;color:var(--gray-3);">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== QR / ID CARD ===== -->
+      <section id="sec-qrid" style="display:none;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div class="card">
+            <div class="card-header"><h2>My QR Code</h2></div>
+            <div class="qr-container">
+              <div id="qrCode"></div>
+              <p style="font-size:0.78rem;color:var(--gray-3);text-align:center;">Scan this QR at event check-in</p>
+              <button class="btn btn-primary" onclick="downloadQR()">⬇ Download QR</button>
+            </div>
+          </div>
+          <div class="card" id="idCard" style="background:linear-gradient(135deg,var(--navy),var(--royal));color:white;">
+            <div style="text-align:center;padding:8px 0 16px;">
+              <svg viewBox="0 0 60 60" style="width:50px;height:50px;">
+                <circle cx="30" cy="30" r="28" stroke="#FFD700" stroke-width="2" fill="none"/>
+                <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" fill="#FFD700" font-size="9" font-family="serif" font-weight="bold">NWC</text>
+                <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" fill="#FFD700" font-size="4.5" font-family="serif">EST. 1945</text>
+              </svg>
+              <p style="font-size:0.6rem;opacity:0.6;margin-top:4px;">NOWROSJEE WADIA COLLEGE, PUNE</p>
+            </div>
+            <div style="background:rgba(255,255,255,0.07);border-radius:10px;padding:16px;margin-bottom:16px;">
+              <div style="width:60px;height:60px;border-radius:50%;background:var(--gold);display:grid;place-items:center;font-size:1.5rem;font-weight:700;color:var(--navy);margin:0 auto 12px;" id="idAvatar">?</div>
+              <h3 id="idName" style="text-align:center;font-size:1rem;font-weight:700;">Student Name</h3>
+              <p id="idRoll" style="text-align:center;font-size:0.75rem;opacity:0.6;margin-top:4px;">Roll No.</p>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.75rem;">
+              <div style="background:rgba(255,255,255,0.07);border-radius:8px;padding:10px;">
+                <p style="opacity:0.5;font-size:0.65rem;text-transform:uppercase;">Department</p>
+                <p id="idDept" style="font-weight:600;margin-top:2px;">—</p>
+              </div>
+              <div style="background:rgba(255,255,255,0.07);border-radius:8px;padding:10px;">
+                <p style="opacity:0.5;font-size:0.65rem;text-transform:uppercase;">Year</p>
+                <p id="idYear" style="font-weight:600;margin-top:2px;">—</p>
+              </div>
+            </div>
+            <div style="margin-top:12px;background:rgba(255,255,255,0.07);border-radius:8px;padding:10px;text-align:center;">
+              <p style="opacity:0.5;font-size:0.65rem;text-transform:uppercase;">Email</p>
+              <p id="idEmail" style="font-weight:500;margin-top:2px;font-size:0.78rem;">—</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== PROFILE ===== -->
+      <section id="sec-profile" style="display:none;">
+        <div class="card" style="max-width:560px;">
+          <div class="card-header"><h2>My Profile</h2></div>
+          <div class="form-row">
+            <div class="form-group"><label>Full Name</label><input type="text" id="pName"/></div>
+            <div class="form-group"><label>Email</label><input type="email" id="pEmail" readonly style="opacity:0.6;"/></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Roll Number</label><input type="text" id="pRoll" readonly style="opacity:0.6;"/></div>
+            <div class="form-group"><label>Phone</label><input type="tel" id="pPhone"/></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Department</label><input type="text" id="pDept" readonly style="opacity:0.6;"/></div>
+            <div class="form-group"><label>Year</label><input type="text" id="pYear" readonly style="opacity:0.6;"/></div>
+          </div>
+          <button class="btn btn-primary" onclick="updateProfile()">Save Changes</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- Event QR Modal -->
+<div class="modal-overlay" id="eventQRModal">
+  <div class="modal" style="max-width:320px;text-align:center;">
+    <div class="modal-header">
+      <h2>Event QR Code</h2>
+      <button class="modal-close" onclick="closeModal('eventQRModal')">✕</button>
+    </div>
+    <div class="qr-container">
+      <div id="eventQRCode"></div>
+      <p id="eventQRLabel" style="font-size:0.8rem;color:var(--gray-3);"></p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/student.js"></script>
+</body>
+</html>

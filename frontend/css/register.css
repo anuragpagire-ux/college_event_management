@@ -1,0 +1,12 @@
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.input-wrap select {
+  width: 100%; padding: 12px 12px 12px 40px;
+  border: 1.5px solid var(--gray-2); border-radius: var(--radius);
+  font-size: 0.9rem; font-family: 'Inter', sans-serif; color: var(--text);
+  background: var(--gray-1); outline: none; cursor: pointer; appearance: none;
+}
+.input-wrap select:focus {
+  border-color: var(--royal); background: var(--white);
+  box-shadow: 0 0 0 3px rgba(26,58,108,0.08);
+}
+@media (max-width: 500px) { .two-col { grid-template-columns: 1fr; } }
