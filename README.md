@@ -63,8 +63,8 @@ You should see:
 🎓 NWC Event Management System - Backend
 =============================================
 🌐 API URL  : http://127.0.0.1:5000
-👤 Admin    : admin@nwcpune.ac.in / admin123
-👥 Student  : rahul@nwcpune.ac.in / student123
+👤 Admin    : anuragpagire@gmail.com/ admin123
+👥 Student  : anuragpagire2003@gmail.com /student123
 =============================================
 ```
 
