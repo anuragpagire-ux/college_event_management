@@ -64,7 +64,7 @@ You should see:
 =============================================
 🌐 API URL  : http://127.0.0.1:5000
 👤 Admin    : anuragpagire@gmail.com/ admin123
-👥 Student  : anuragpagire2003@gmail.com /student123
+👥 Student  : anuragpagire2003@gmail.com /anurag123
 =============================================
 ```
 
@@ -92,13 +92,13 @@ Then visit: **http://localhost:8080/login.html**
 ### STEP 5 — Login & Explore
 
 **Admin Login**
-- Email: `admin@nwcpune.ac.in`
+- Email: `anuragpagire@gmail.com`
 - Password: `admin123`
 - Tab: Admin
 
 **Student Login**
-- Email: `rahul@nwcpune.ac.in`
-- Password: `student123`
+- Email: `anuragpagire2003@gmail.com`
+- Password: `anurag@123`
 - Tab: Student
 
 **New Student?**
